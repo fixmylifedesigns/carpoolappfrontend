@@ -99,7 +99,7 @@ export default function AllRidesPage(props) {
         {rides.length > 0 &&
           rides
             .sort(function(x, y) {
-              return x.id - y.id;
+              return y.id - x.id;
             })
             .filter(ride =>
               ride.pick_up.toLowerCase().includes(search.pick_up.toLowerCase())
