@@ -1,13 +1,54 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.gradient {
+  z-index: -100;
+  height: 100vh;
+  background-image: linear-gradient(160deg, rgb(143, 77, 77) 30%, rgb(116, 39, 62) 80%);
+  -webkit-transform: skew(0deg, -8deg);
+  -ms-transform: skew(0deg, -8deg);
+  transform: skew(0deg, -8deg);
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+  position: fixed;
+  width: 100%;
+}
+
+.gradient-2 {
+  
+  top: 0;
+  right: 0;
+  height: 20%;
+  background-image: linear-gradient(
+    270deg,
+    rgba(102, 51, 255, 0),
+    rgba(102, 51, 255, 0.2)
+  );
+  position: absolute;
+  width: 100%;
+}
+
+.gradient-3 {
+  left: 0;
+  bottom: 0;
+  height: 30%;
+  background-image: linear-gradient(
+    270deg,
+    rgba(0, 153, 255, 0.2),
+    rgba(0, 153, 255, 0)
+  );
+  position: absolute;
+  width: 100%;
 }

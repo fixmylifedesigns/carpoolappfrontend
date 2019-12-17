@@ -1,7 +1,7 @@
 .App {
   text-align: center;
-  display:flex;
-  flex-direction: row;
+  /* display:flex;
+  flex-direction: row; */
 }
 
 .App-logo {
@@ -16,36 +16,336 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  width:20%;
-  min-width:300px;
+  z-index: 1;
+  border-bottom: solid 3px grey;
+  top: 0;
+  position: fixed;
+  background-color: white;
+  /* min-height: 100vh; */
+  width: 100%;
+  height: 100px;
+  /* max-width:300px; */
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  /* flex-direction: column; */
   /* align-items: center; */
   /* justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.main{
-  width:70%
-}
-.ridesList{
-display:flex;
-flex-direction: column;
-justify-content: center;
-
-}
-.App-link {
-  color: #61dafb;
+.navigation {
+  /* position:fixed; */
+  max-width: 900px;
+  margin: auto;
+  width: 90%;
+  color: rgb(116, 39, 62);
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.logo {
+  margin: 0;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 40px;
+}
+
+.navOptions {
+  margin: 0;
+  text-decoration: none;
+  padding: 0 30px;
+  font-size: 25px;
+  color: rgb(116, 39, 62);
+  font-weight: bolder;
+}
+
+.log {
+  margin: 0;
+  background: rgb(116, 39, 62);
+  color: white;
+  padding: 5px 10px;
+  width: 70px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.main {
+  width: 100%;
+  margin-top: 120px;
+}
+
+/* All Rides page */
+
+/* search inputs */
+.frontTitle {
+  color: white;
+}
+
+.textInput {
+  height: 40px;
+  text-align: center;
+  width: 150px;
+  border-radius: 20px;
+}
+
+.next {
+  background: rgb(116, 39, 62);
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  margin-left: -15px;
+  margin-top: 8px;
+  padding-top: 2px;
+  padding-right: 2px;
+  display: inline-block;
+  position: absolute;
+}
+
+input[type="time"] {
+  border: none;
+  border-radius: 10px;
+  align-content: center;
+  color: #2a2c2d;
+  height: 40px;
+  /* font-size: 14px; */
+  font-family: helvetica;
+  width: 140px;
+}
+
+input[type="time"]::-webkit-datetime-edit-fields-wrapper {
+  display: flex;
+}
+
+input[type="time"]::-webkit-datetime-edit-text {
+  padding: 19px 4px;
+}
+input[type="time"]::-webkit-datetime-edit-hour-field {
+  background-color: #f2f4f5;
+  border-radius: 15%;
+  padding: 19px 13px;
+  width: 15px;
+}
+
+/* Minute */
+input[type="time"]::-webkit-datetime-edit-minute-field {
+  background-color: #f2f4f5;
+  border-radius: 15%;
+  padding: 19px 13px;
+  width: 15px;
+}
+input[type="time"]::-webkit-datetime-edit-ampm-field {
+  background-color: #5f3b60;
+  border-radius: 15%;
+  color: #fff;
+  padding: 19px 13px;
+  width: 15px;
+}
+input[type="time"]::-webkit-clear-button {
+  display: none;
+}
+input[type="time"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+select {
+  cursor: pointer;
+  height: 40px;
+  text-align: center;
+  width: 70px;
+  display: inline-block;
+  border-radius: 20px;
+
+  /* position:relative; */
+  /* font:normal 11px/22px Arial, Sans-Serif; */
+  color: black;
+  /* border:1px solid #ccc; */
+}
+
+.inputArrow {
+  border: solid white;
+  /* z-index: -100; */
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.rideCard {
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  border: solid grey 1px;
+  margin: 5px auto;
+  width: 90%;
+  border-radius: 20px;
+  max-width: 800px;
+}
+
+.rideInfo {
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  padding: 2px 0;
+  width: 90%;
+}
+
+.bookButton {
+  width: 100px;
+  border-radius: 0px 20px 20px 0px;
+}
+
+.ridesList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.arrowright {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+.location {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+}
+
+.availability {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+}
+
+/* forms page */
+
+.svg {
+  width: 50%;
+  /* height: 400px; */
+}
+
+.formheader {
+  color: rgb(116, 39, 62);
+}
+
+.formConatiner {
+  background: white;
+  max-width: 700px;
+  margin: auto;
+  display: flex;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+form {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.FormInput {
+  height: 40px;
+  text-align: center;
+  border-radius: 20px;
+}
+.radiosection {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: rgb(116, 39, 62);
+}
+.radioContainer {
+  text-align: left;
+  color: rgb(116, 39, 62);
+  font-weight: bold;
+}
+
+.formbutton {
+  margin: 0;
+  background: rgb(116, 39, 62);
+  margin: auto;
+  color: white;
+  padding: 5px 10px;
+  height: 40px;
+  width: 100%;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.time {
+  margin: auto;
+}
+
+@media only screen and (max-width: 800px) {
+  .navigation {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+  .log {
+    margin: auto;
+  }
+  .rideInfo {
+    flex-direction: column;
+    width: 100%;
+  }
+  .location {
+    display: flex;
+    width: 90%;
+    padding: 0 5%;
+    margin: auto;
+    border-bottom: solid grey 0.04px;
+    justify-content: space-between;
+  }
+  .availability {
+    display: flex;
+    width: 90%;
+    margin: auto;
+    justify-content: space-between;
+  }
+
+  /* login form */
+
+  .formheader {
+    color: rgb(116, 39, 62);
+    /* font-weight: bold; */
+  }
+
+  .svg {
+    width: 100%;
+    /* margin: auto; */
+  }
+  .formConatiner {
+    /* width: 100%; */
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .loginForm {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .rideCard {
+    border: 0;
+    border-radius: 0;
+  }
+  .rideCard {
+    flex-direction: column;
+    width: 100%;
+  }
+  .mobileNone {
+    display: none;
+  }
+
+  .bookButton {
+    width: 100%;
+    font-size: 20px;
+    height: 50px;
+    border-radius: 0px;
   }
 }

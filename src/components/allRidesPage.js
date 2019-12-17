@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
-export default function AllRidesPage() {
+import { axiosWithAuth } from "./configurations/axiosConfig";
+
+export default function AllRidesPage(props) {
   const [rides, setRides] = useState({});
+  const [search, setSearch] = useState({
+    pick_up: "",
+    drop_off: "",
+    vehicle_type: "all",
+    time: false
+  });
+  const [bookRide, setBookride] = useState(false);
 
   useEffect(() => {
     axios
@@ -10,63 +19,169 @@ export default function AllRidesPage() {
       .then(res => {
         console.log(res.data);
         setRides(res.data);
+        setBookride(false);
       })
       .catch(err => {
         console.log(err);
       });
-  }, []);
+  }, [bookRide, props.loggedin,props.userInfo.id  ]);
+
+  const resetSearch = () => {
+    setSearch({
+      pick_up: "",
+      drop_off: "",
+      vehicle_type: "all",
+      time: false
+    });
+  };
+
+  const submitBooking = rideId => {
+    axiosWithAuth()
+      .post("api/booked", {
+        ride_id: rideId
+      })
+      .then(res => {
+        setBookride(true);
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  const handleSearch = e => {
+    e.preventDefault();
+    setSearch({
+      ...search,
+      [e.target.name]: e.target.value
+    });
+  };
 
   return (
     <div>
-      <h1>Book your ride</h1>
-      <form>
-        <input />
-        <input />
-        <input />
-        <button>submit</button>
-      </form>
+      {console.log(search)}
+      {!props.loggedin ? (
+        <h1 className="frontTitle">Sign Up Now to Book Your Ride</h1>
+      ) : (
+        <h1 className="frontTitle">Book your ride</h1>
+      )}
+<div>
+  
+</div>
+      <input
+        className="textInput"
+        onChange={handleSearch}
+        name="pick_up"
+        placeholder="Pick up"
+        value={search.pick_up}
+      />
+      <div className="next">
+      <i class="inputArrow"></i>
+      </div>
+      <input
+        className="textInput"
+        onChange={handleSearch}
+        name="drop_off"
+        placeholder="Destination"
+        value={search.drop_off}
+      />
+      <select onChange={handleSearch} name="vehicle_type">
+        <option value="all">All</option>
+        <option value="car">Car</option>
+        <option value="bike">Bike</option>
+      </select>
+      <input type="time" className="timeInput" onChange={handleSearch} name="time" />
+      {!search.time && search.pick_up === "" && search.drop_off === "" ? (
+        ""
+      ) : (
+        <button className="log"onClick={resetSearch}>clear</button>
+      )}
       <div className="ridesList">
         {rides.length > 0 &&
-          rides.map(ride => {
-            return (
-              <div
-                style={{
-                  border: "solid grey 1px",
-                  marginTop: "",
-                  width: "80%",
-                  margin:"5px auto "
-                }}
-              >
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <p>
-                    {ride.pick_up} to {ride.drop_off}
-                  </p>
-              <p>there are {ride.vacant_seats - ride.taken_seats} seats available</p>
-                  <p>{moment(ride.time).format("LT")}</p>
-                  <button>Book Now</button>
+          rides
+            .sort(function(x, y) {
+              return x.id - y.id;
+            })
+            .filter(ride =>
+              ride.pick_up.toLowerCase().includes(search.pick_up.toLowerCase())
+            )
+            .filter(ride =>
+              ride.drop_off
+                .toLowerCase()
+                .includes(search.drop_off.toLowerCase())
+            )
+            .filter(ride => {
+              if (search.vehicle_type === "all") {
+                return ride.vehicle_type;
+              } else {
+                return ride.vehicle_type.includes(search.vehicle_type);
+              }
+            })
+            .filter(ride => {
+              if (!!search.time) {
+                const ride_time =
+                  ride.time.substring(0, 2) - search.time.substring(0, 2);
+                return (
+                  ride_time === -1 ||
+                  ride_time === 0 ||
+                  ride_time === 1 ||
+                  ride_time === 23
+                );
+              } else {
+                return ride;
+              }
+            })
+            .map(ride => {
+              return (
+                <div className="rideCard">
+                  <div className="rideInfo">
+                    <div className="location">
+                      <p>{ride.pick_up}</p>
+                      <p>
+                        <i class="arrowright"></i>{" "}
+                        <i class="arrowright mobileNone"></i>{" "}
+                        <i class="arrowright mobileNone"></i>
+                      </p>
+                      <p>{ride.drop_off}</p>
+                    </div>
+                    <div className="availability">
+                      {props.userInfo.id === ride.user_id ? (
+                        <p>
+                          {ride.vacant_seats - ride.taken_seats} seats available
+                          for your trip
+                        </p>
+                      ) : (
+                        <p>
+                          There are {ride.vacant_seats - ride.taken_seats} seats
+                          available
+                        </p>
+                      )}
+
+                      <p>{moment(ride.time, "HH:mm:ss").format("h:mm A")}</p>
+                    </div>
+                  </div>
+                  {props.loggedin  && props.userInfo.id === ride.user_id   ? (
+                    ""
+                  ) : (
+                    <button
+                      className="bookButton"
+                      disabled={
+                        !ride.availability ||
+                        props.loggedin === false ||
+                        props.userInfo.id === ride.user_id
+                          ? "true"
+                          : ""
+                      }
+                      onClick={() => {
+                        submitBooking(ride.id);
+                      }}
+                    >
+                      {!ride.availability ? "Full" : "Book Now"}
+                    </button>
+                  )}
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
       </div>
     </div>
   );
 }
-
-// availability: true
-// created_at: "2019-12-12T18:36:53.180Z"
-// description: "I will be outside the building"
-// drop_off: "new jersey"
-// drop_off_latitude: null
-// drop_off_longitude: null
-// id: 1
-// pick_up: "new york"
-// pick_up_latitude: null
-// pick_up_longitude: null
-// taken_seats: 1
-// time: "2018-11-29T00:00:00.000Z"
-// updated_at: "2019-12-12T18:36:53.180Z"
-// user_id: 1
-// vacant_seats: 3
-// vehicle_no: "he82d2"
-// vehicle_type: "car"
