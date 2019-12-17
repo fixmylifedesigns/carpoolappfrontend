@@ -6,6 +6,7 @@ import Login from "./components/login";
 import RideForm from "./components/rideForm";
 import { Route, Link } from "react-router-dom";
 import Navigation from "./components/navigation";
+import Account from "./components/accountPage";
 import PrivateRoute from "./components/configurations/privateRoute";
 import { UserContext } from "./components/configurations/context";
 import { axiosWithAuth } from "./components/configurations/axiosConfig";
@@ -57,10 +58,10 @@ function App() {
           <Route exact path="/register" component={Registration} />
           <PrivateRoute
             exact
-            path="/newride"
-            component={RideForm}
-            loggedin={loggedin}
+            path="/account"
+            component={() => <Account userInfo={userInfo} loggout={loggout} />}
           />
+          <PrivateRoute exact path="/newride" component={RideForm} />
         </div>
       </div>
     </UserContext.Provider>

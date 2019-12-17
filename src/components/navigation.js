@@ -11,14 +11,10 @@ export default function Navigation(props) {
         {/* <div> */}
 
         {props.loggedin ? (
-          <div className="loggedinContainer">
-            <Link to="/newride" className="navOptions log">
-              Create a ride
+            <Link to="/account" className="navOptions log">
+              <i class="fa fa-user"></i>
             </Link>
-            <Link onClick={props.loggout} className="navOptions log">
-              Logout
-            </Link>
-          </div>
+         
         ) : (
           <>
             <Link to="/login" className="navOptions log">

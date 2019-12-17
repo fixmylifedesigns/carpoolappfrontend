@@ -282,6 +282,13 @@ form {
   margin: auto;
 }
 
+/*account page */
+.postsContainer{
+  max-width:500px;
+  width:100%;
+  margin:auto
+}
+
 @media only screen and (max-width: 800px) {
   .navigation {
     flex-direction: column;
