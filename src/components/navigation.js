@@ -8,13 +8,10 @@ export default function Navigation(props) {
         <Link className="logo" to="/">
           CARPOOL
         </Link>
-        {/* <div> */}
-
         {props.loggedin ? (
-            <Link to="/account" className="navOptions log">
-              <i class="fa fa-user"></i>
-            </Link>
-         
+          <Link to="/account" className="navOptions log">
+            <i class="fa fa-user"></i>
+          </Link>
         ) : (
           <>
             <Link to="/login" className="navOptions log">
@@ -22,7 +19,6 @@ export default function Navigation(props) {
             </Link>
           </>
         )}
-        {/* </div> */}
       </nav>
     </header>
   );

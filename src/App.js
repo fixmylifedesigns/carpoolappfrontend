@@ -4,7 +4,8 @@ import AllRidesPage from "./components/allRidesPage";
 import Registration from "./components/registration";
 import Login from "./components/login";
 import RideForm from "./components/rideForm";
-import { Route, Link } from "react-router-dom";
+import { Route} from "react-router-dom";
+import Footer from './components/footer'
 import Navigation from "./components/navigation";
 import Account from "./components/accountPage";
 import PrivateRoute from "./components/configurations/privateRoute";
@@ -64,6 +65,7 @@ function App() {
           <PrivateRoute exact path="/newride" component={RideForm} />
         </div>
       </div>
+      <Footer/>
     </UserContext.Provider>
   );
 }
