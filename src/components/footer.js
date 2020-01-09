@@ -18,10 +18,10 @@ export default function Footer() {
             Api Docs
           </a>
           <a href="https://github.com/fixmylifedesigns/carpoolappfrontend">
-            Back-End Github
+            Front-End Github
           </a>
           <a href="https://github.com/fixmylifedesigns/carpoolappbackend">
-            Front-End Github
+            Back-End Github
           </a>
         </div>
         </div>
